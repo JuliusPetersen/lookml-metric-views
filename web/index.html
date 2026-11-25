@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>LookML to metric views</title>
+<meta name="description" content="Convert a Looker (LookML) project into Databricks Unity Catalog metric views, one per explore, and see field by field what translated exactly and what needs a person.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="./">LookML to metric views</a>
+    <nav aria-label="Project links">
+      <a href="notes.html">Product notes</a>
+      <a href="https://github.com/JuliusPetersen/lookml-metric-views">Source on GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="intro wrap">
+    <h1>Move Looker's metric definitions into Unity Catalog, and see exactly what still needs a person.</h1>
+    <p class="lede">As of November 2026, Databricks' import tools list Tableau and Power BI as sources for metric views, not Looker. This tool turns every Looker explore into one metric view with its joins, and marks each field: <span class="tag exact">exact</span>, <span class="tag adapted">adapted</span>, <span class="tag review">review</span> or <span class="tag manual">manual</span>.</p>
+  </section>
+
+  <section class="wrap" aria-labelledby="run-title">
+    <h2 id="run-title" class="visually-hidden">Convert a project</h2>
+    <form id="run" class="run" autocomplete="off">
+      <div class="field grow">
+        <label for="repo">Public GitHub repository with .lkml files</label>
+        <input id="repo" name="repo" type="url" value="https://github.com/looker-open-source/thelook" required>
+      </div>
+      <div class="field">
+        <label for="dialect">SQL dialect of the Looker connection</label>
+        <select id="dialect" name="dialect">
+          <option value="databricks">Databricks</option>
+          <option value="bigquery" selected>BigQuery</option>
+          <option value="snowflake">Snowflake</option>
+          <option value="redshift">Redshift</option>
+          <option value="postgres">Postgres</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="target">Unity Catalog target</label>
+        <input id="target" name="target" value="main.thelook" pattern="[A-Za-z0-9_]+\.[A-Za-z0-9_]+" title="catalog.schema">
+      </div>
+      <div class="actions">
+        <button type="submit" id="convert">Convert</button>
+        <label class="upload">
+          <input id="files" type="file" multiple accept=".lkml,.lookml">
+          <span>Use local .lkml files</span>
+        </label>
+      </div>
+    </form>
+    <p class="privacy">The conversion runs in your browser with Python (Pyodide). Your LookML is not sent anywhere except the GitHub download you ask for.</p>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="wrap result" id="result" aria-label="Conversion result" hidden>
+    <div class="result-head">
+      <h2 id="result-title">Result</h2>
+      <button type="button" id="download" class="secondary">Download metric views and report (.zip)</button>
+    </div>
+    <div class="strip" id="strip" aria-hidden="true"></div>
+    <ul class="legend" id="legend"></ul>
+    <p class="auto" id="auto"></p>
+
+    <div class="ledger-layout">
+      <nav class="explores" aria-label="Explores">
+        <h3>Explores</h3>
+        <ul id="explore-list"></ul>
+      </nav>
+      <div class="ledger-wrap">
+        <div class="ledger-tools">
+          <h3 id="explore-title"></h3>
+          <div class="filters" role="group" aria-label="Show status">
+            <button type="button" data-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-filter="review" aria-pressed="false">Review</button>
+            <button type="button" data-filter="manual" aria-pressed="false">Manual</button>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="ledger">
+            <thead><tr><th scope="col">Status</th><th scope="col">Looker</th><th scope="col">Metric view</th><th scope="col">Why</th></tr></thead>
+            <tbody id="ledger"></tbody>
+          </table>
+        </div>
+        <details class="yaml" id="yaml-box">
+          <summary>Metric view YAML</summary>
+          <div class="yaml-actions"><button type="button" id="copy-yaml" class="secondary small">Copy YAML</button></div>
+          <pre><code id="yaml"></code></pre>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap evidence" aria-labelledby="survey-title">
+    <h2 id="survey-title">What public Looker projects need</h2>
+    <p id="survey-intro">Loading the survey…</p>
+    <div id="survey-chart" class="survey-chart"></div>
+    <p id="survey-finding"></p>
+    <ol id="survey-reasons" class="reasons"></ol>
+    <p class="fine" id="survey-fine"></p>
+  </section>
+
+  <section class="wrap evidence" aria-labelledby="live-title" id="live" hidden>
+    <h2 id="live-title">Checked in a Databricks workspace</h2>
+    <div id="live-body"></div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>Built by Julius Petersen, MSc student at Nova SBE, Lisbon. <a href="https://www.linkedin.com/in/julius-petersen-is">LinkedIn</a></p>
+    <p class="fine">Independent project based on public documentation. Not affiliated with or reviewed by Databricks or Google. Looker and Databricks are trademarks of their owners.</p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

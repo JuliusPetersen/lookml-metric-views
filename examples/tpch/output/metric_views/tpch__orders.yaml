@@ -1,0 +1,60 @@
+# Metric view for Looker explore 'orders'. Deploy with create_metric_views.sql.
+version: '1.1'
+comment: (Converted from Looker explore 'orders'.)
+source: samples.tpch.orders
+joins:
+- name: customer
+  source: samples.tpch.customer
+  'on': source.o_custkey = customer.c_custkey
+  joins:
+  - name: nation
+    source: samples.tpch.nation
+    'on': customer.c_nationkey = nation.n_nationkey
+fields:
+- name: o_orderkey
+  expr: source.o_orderkey
+  display_name: O Orderkey
+- name: status
+  expr: source.o_orderstatus
+  display_name: Status
+- name: priority
+  expr: source.o_orderpriority
+  display_name: Priority
+- name: total_price
+  expr: source.o_totalprice
+  display_name: Total Price
+- name: ordered_date
+  expr: TO_DATE(source.o_orderdate)
+  display_name: Ordered Date
+- name: ordered_month
+  expr: TO_DATE(DATE_TRUNC('MONTH', source.o_orderdate))
+  display_name: Ordered Month
+- name: ordered_year
+  expr: YEAR(source.o_orderdate)
+  display_name: Ordered Year
+- name: customer_c_custkey
+  expr: customer.c_custkey
+  display_name: Customer C Custkey
+- name: customer_segment
+  expr: customer.c_mktsegment
+  display_name: Customer Segment
+- name: nation_name
+  expr: customer.nation.n_name
+  display_name: Nation Name
+measures:
+- name: order_count
+  expr: COUNT(1)
+  display_name: Order Count
+- name: total_order_value
+  expr: SUM(source.o_totalprice)
+  display_name: Total Order Value
+  comment: Sum of order totals. In the lineitem explore Looker sums each order once.
+- name: max_order_value
+  expr: MAX(source.o_totalprice)
+  display_name: Max Order Value
+- name: urgent_orders
+  expr: COUNT(1) FILTER (WHERE source.o_orderpriority = '1-URGENT')
+  display_name: Urgent Orders
+- name: customer_customer_count
+  expr: COUNT(DISTINCT customer.c_custkey)
+  display_name: Customer Customer Count

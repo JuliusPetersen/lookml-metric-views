@@ -1,0 +1,123 @@
+{
+  "date": "2026-11-25",
+  "created": [
+    "workspace.lookml_test.tpch__lineitem",
+    "workspace.lookml_test.tpch__orders"
+  ],
+  "rows": [
+    {
+      "metric_view": "29558622",
+      "looker_sql": "29558622",
+      "match": true,
+      "measure": "tpch__lineitem.line_count",
+      "status": "exact"
+    },
+    {
+      "metric_view": "753837159.00",
+      "looker_sql": "753837159.00",
+      "match": true,
+      "measure": "tpch__lineitem.total_quantity",
+      "status": "exact"
+    },
+    {
+      "metric_view": "1073799974486.3241",
+      "looker_sql": "1073799974486.3241",
+      "match": true,
+      "measure": "tpch__lineitem.total_net_revenue",
+      "status": "exact"
+    },
+    {
+      "metric_view": "269147687267.2029",
+      "looker_sql": "269147687267.2029",
+      "match": true,
+      "measure": "tpch__lineitem.returned_revenue",
+      "status": "exact"
+    },
+    {
+      "metric_view": "26872174",
+      "looker_sql": "26872174",
+      "match": true,
+      "measure": "tpch__lineitem.discounted_lines",
+      "status": "exact"
+    },
+    {
+      "metric_view": "0.250650",
+      "looker_sql": "0.250650",
+      "match": true,
+      "measure": "tpch__lineitem.return_rate",
+      "status": "exact"
+    },
+    {
+      "metric_view": "7464641",
+      "looker_sql": "7464641",
+      "match": true,
+      "measure": "tpch__lineitem.orders_order_count",
+      "status": "exact"
+    },
+    {
+      "metric_view": "5583644584738.41",
+      "looker_sql": "1130449923256.99",
+      "match": false,
+      "measure": "tpch__lineitem.orders_total_order_value",
+      "status": "review"
+    },
+    {
+      "metric_view": "569370.40",
+      "looker_sql": "569370.40",
+      "match": true,
+      "measure": "tpch__lineitem.orders_max_order_value",
+      "status": "exact"
+    },
+    {
+      "metric_view": "1493928",
+      "looker_sql": "1493928",
+      "match": true,
+      "measure": "tpch__lineitem.orders_urgent_orders",
+      "status": "exact"
+    },
+    {
+      "metric_view": "499989",
+      "looker_sql": "499989",
+      "match": true,
+      "measure": "tpch__lineitem.customer_customer_count",
+      "status": "exact"
+    },
+    {
+      "metric_view": "7500000",
+      "looker_sql": "7500000",
+      "match": true,
+      "measure": "tpch__orders.order_count",
+      "status": "exact"
+    },
+    {
+      "metric_view": "1133439215246.25",
+      "looker_sql": "1133439215246.25",
+      "match": true,
+      "measure": "tpch__orders.total_order_value",
+      "status": "exact"
+    },
+    {
+      "metric_view": "569370.40",
+      "looker_sql": "569370.40",
+      "match": true,
+      "measure": "tpch__orders.max_order_value",
+      "status": "exact"
+    },
+    {
+      "metric_view": "1501100",
+      "looker_sql": "1501100",
+      "match": true,
+      "measure": "tpch__orders.urgent_orders",
+      "status": "exact"
+    },
+    {
+      "metric_view": "499989",
+      "looker_sql": "499989",
+      "match": true,
+      "measure": "tpch__orders.customer_customer_count",
+      "status": "exact"
+    }
+  ],
+  "summary": "On 25 Nov 2026 I created the 2 generated metric views in a Databricks Free Edition workspace over the TPC-H sample data and compared 16 measures with SQL that reproduces Looker's results. 15 match exactly. The measure that differs is the one the report marks Review, as expected (4.9 times Looker's value): Looker counts each order once (symmetric aggregates), the metric view once per order line.",
+  "note": "Example LookML and both sets of SQL are in the repository (examples/tpch, scripts/live_check.py)."
+}

@@ -1,0 +1,750 @@
+{
+  "date": "2026-11-25",
+  "projects": [
+    {
+      "repo": "looker-open-source/ca-demos-and-tools",
+      "error": "no .lkml files"
+    },
+    {
+      "repo": "looker-open-source/gcs-storage-intelligence-block",
+      "dialect": "bigquery",
+      "files": 43,
+      "views": 22,
+      "explores": 11,
+      "metric_views": 11,
+      "counts": {
+        "adapted": 102,
+        "manual": 287,
+        "review": 7,
+        "skipped": 77,
+        "exact": 458
+      },
+      "seconds": 2.03
+    },
+    {
+      "repo": "looker-open-source/block-intelligence-cloud-sql",
+      "dialect": "bigquery",
+      "files": 26,
+      "views": 6,
+      "explores": 5,
+      "metric_views": 0,
+      "counts": {
+        "manual": 182
+      },
+      "seconds": 0.14
+    },
+    {
+      "repo": "looker-open-source/ga_four_block",
+      "dialect": "bigquery",
+      "files": 43,
+      "views": 44,
+      "explores": 14,
+      "metric_views": 0,
+      "counts": {
+        "manual": 176
+      },
+      "seconds": 0.33
+    },
+    {
+      "repo": "looker-open-source/block-multicloud-billing-bq-export",
+      "dialect": "bigquery",
+      "files": 19,
+      "views": 13,
+      "explores": 1,
+      "metric_views": 1,
+      "counts": {
+        "review": 11,
+        "manual": 21,
+        "skipped": 30,
+        "exact": 38,
+        "adapted": 8
+      },
+      "seconds": 0.07
+    },
+    {
+      "repo": "looker-open-source/chrome-ux-looker-block",
+      "dialect": "bigquery",
+      "files": 20,
+      "views": 11,
+      "explores": 6,
+      "metric_views": 2,
+      "counts": {
+        "manual": 669,
+        "exact": 255,
+        "adapted": 4,
+        "skipped": 1
+      },
+      "seconds": 0.71
+    },
+    {
+      "repo": "looker-open-source/block-google-ads-transfer",
+      "dialect": "bigquery",
+      "files": 17,
+      "views": 15,
+      "explores": 2,
+      "metric_views": 0,
+      "counts": {
+        "manual": 11
+      },
+      "seconds": 0.16
+    },
+    {
+      "repo": "looker-open-source/search-console-block",
+      "dialect": "bigquery",
+      "files": 11,
+      "views": 4,
+      "explores": 4,
+      "metric_views": 3,
+      "counts": {
+        "exact": 58,
+        "adapted": 18,
+        "manual": 40,
+        "skipped": 20
+      },
+      "seconds": 0.12
+    },
+    {
+      "repo": "looker-open-source/block-youtube",
+      "dialect": "bigquery",
+      "files": 18,
+      "views": 14,
+      "explores": 2,
+      "metric_views": 2,
+      "counts": {
+        "adapted": 13,
+        "exact": 59,
+        "skipped": 25,
+        "manual": 1,
+        "review": 5
+      },
+      "seconds": 0.15
+    },
+    {
+      "repo": "looker-open-source/block-gcp-billing",
+      "dialect": "bigquery",
+      "files": 12,
+      "views": 9,
+      "explores": 1,
+      "metric_views": 0,
+      "counts": {
+        "manual": 23
+      },
+      "seconds": 0.03
+    },
+    {
+      "repo": "looker-open-source/bigquery_information_schema_block",
+      "dialect": "bigquery",
+      "files": 29,
+      "views": 31,
+      "explores": 10,
+      "metric_views": 4,
+      "counts": {
+        "review": 10,
+        "manual": 412,
+        "exact": 75,
+        "skipped": 15,
+        "adapted": 4
+      },
+      "seconds": 0.22
+    },
+    {
+      "repo": "looker-open-source/block-workspace-audit-logs",
+      "dialect": "bigquery",
+      "files": 40,
+      "views": 81,
+      "explores": 13,
+      "metric_views": 11,
+      "counts": {
+        "exact": 9865,
+        "adapted": 371,
+        "skipped": 511,
+        "manual": 185,
+        "review": 8
+      },
+      "seconds": 6.35
+    },
+    {
+      "repo": "looker-open-source/google-trends-block",
+      "dialect": "bigquery",
+      "files": 12,
+      "views": 6,
+      "explores": 2,
+      "metric_views": 0,
+      "counts": {
+        "manual": 50
+      },
+      "seconds": 0.05
+    },
+    {
+      "repo": "looker-open-source/block-multicloud-billing-dashboard",
+      "dialect": "bigquery",
+      "files": 3,
+      "views": 1,
+      "explores": 1,
+      "metric_views": 1,
+      "counts": {
+        "exact": 1,
+        "manual": 3
+      },
+      "seconds": 0.01
+    },
+    {
+      "repo": "looker-open-source/agent-analytics-block",
+      "dialect": "bigquery",
+      "files": 10,
+      "views": 5,
+      "explores": 1,
+      "metric_views": 1,
+      "counts": {
+        "adapted": 20,
+        "exact": 85,
+        "skipped": 17,
+        "manual": 31,
+        "review": 17
+      },
+      "seconds": 0.19
+    },
+    {
+      "repo": "looker-open-source/devrel-demos",
+      "error": "no .lkml files"
+    },
+    {
+      "repo": "looker-open-source/pacing-ads-block",
+      "dialect": "bigquery",
+      "files": 33,
+      "views": 22,
+      "explores": 12,
+      "metric_views": 3,
+      "counts": {
+        "manual": 235,
+        "review": 6,
+        "exact": 395,
+        "adapted": 65
+      },
+      "seconds": 0.51
+    },
+    {
+      "repo": "looker-open-source/looker-embedded-analytics-app-template",
+      "error": "no .lkml files"
+    },
+    {
+      "repo": "looker-open-source/block-gcp-audit-logs",
+      "dialect": "bigquery",
+      "files": 13,
+      "views": 12,
+      "explores": 3,
+      "metric_views": 3,
+      "counts": {
+        "manual": 18,
+        "exact": 204,
+        "skipped": 22,
+        "adapted": 11,
+        "review": 1
+      },
+      "seconds": 0.24
+    },
+    {
+      "repo": "looker-open-source/block-sa360-marketplace",
+      "dialect": "bigquery",
+      "files": 24,
+      "views": 17,
+      "explores": 5,
+      "metric_views": 5,
+      "counts": {
+        "review": 49,
+        "skipped": 288,
+        "exact": 584,
+        "manual": 30,
+        "adapted": 107
+      },
+      "seconds": 0.58
+    },
+    {
+      "repo": "looker-open-source/block-bqml-k-means",
+      "dialect": "bigquery",
+      "files": 24,
+      "views": 22,
+      "explores": 6,
+      "metric_views": 3,
+      "counts": {
+        "exact": 25,
+        "manual": 1
+      },
+      "seconds": 0.09
+    },
+    {
+      "repo": "looker-open-source/block-linkedin-ads",
+      "dialect": "bigquery",
+      "files": 7,
+      "views": 12,
+      "explores": 14,
+      "metric_views": 0,
+      "counts": {
+        "manual": 300
+      },
+      "seconds": 0.15
+    },
+    {
+      "repo": "looker-open-source/block-fivetran-netsuite",
+      "dialect": "bigquery",
+      "files": 9,
+      "views": 4,
+      "explores": 3,
+      "metric_views": 0,
+      "counts": {
+        "manual": 81
+      },
+      "seconds": 0.05
+    },
+    {
+      "repo": "looker-open-source/block-pinterest-ads",
+      "dialect": "bigquery",
+      "files": 33,
+      "views": 15,
+      "explores": 9,
+      "metric_views": 0,
+      "counts": {},
+      "seconds": 0.16
+    },
+    {
+      "repo": "looker-open-source/block-redshift-admin",
+      "dialect": "redshift",
+      "files": 19,
+      "views": 9,
+      "explores": 8,
+      "metric_views": 8,
+      "counts": {
+        "exact": 254,
+        "adapted": 19,
+        "skipped": 37,
+        "manual": 36,
+        "review": 23
+      },
+      "seconds": 0.56
+    },
+    {
+      "repo": "looker-open-source/block-retail",
+      "dialect": "bigquery",
+      "files": 20,
+      "views": 35,
+      "explores": 4,
+      "metric_views": 1,
+      "counts": {
+        "manual": 113,
+        "review": 3,
+        "exact": 27,
+        "skipped": 11,
+        "adapted": 5
+      },
+      "seconds": 0.16
+    },
+    {
+      "repo": "looker-open-source/block-retail-search",
+      "dialect": "bigquery",
+      "files": 14,
+      "views": 18,
+      "explores": 2,
+      "metric_views": 1,
+      "counts": {
+        "manual": 28,
+        "review": 1,
+        "skipped": 33,
+        "exact": 75,
+        "adapted": 14
+      },
+      "seconds": 0.18
+    },
+    {
+      "repo": "looker-open-source/block-sales",
+      "dialect": "bigquery",
+      "files": 16,
+      "views": 10,
+      "explores": 4,
+      "metric_views": 4,
+      "counts": {
+        "review": 53,
+        "skipped": 1123,
+        "exact": 680,
+        "manual": 274,
+        "adapted": 153
+      },
+      "seconds": 0.7
+    },
+    {
+      "repo": "looker-open-source/sap_data_fusion_block",
+      "dialect": "bigquery",
+      "files": 22,
+      "views": 20,
+      "explores": 10,
+      "metric_views": 10,
+      "counts": {
+        "review": 49,
+        "exact": 1300,
+        "adapted": 130,
+        "skipped": 21,
+        "manual": 99
+      },
+      "seconds": 1.14
+    },
+    {
+      "repo": "looker-open-source/block-segment-ads",
+      "dialect": "bigquery",
+      "files": 18,
+      "views": 11,
+      "explores": 5,
+      "metric_views": 5,
+      "counts": {
+        "review": 29,
+        "exact": 345,
+        "skipped": 101,
+        "adapted": 65,
+        "manual": 4
+      },
+      "seconds": 0.33
+    },
+    {
+      "repo": "looker-open-source/block-shopify",
+      "dialect": "bigquery",
+      "files": 18,
+      "views": 15,
+      "explores": 1,
+      "metric_views": 1,
+      "counts": {
+        "manual": 78,
+        "review": 15,
+        "exact": 166,
+        "adapted": 25,
+        "skipped": 13
+      },
+      "seconds": 0.17
+    },
+    {
+      "repo": "looker-open-source/block-snowflake-usage",
+      "dialect": "snowflake",
+      "files": 24,
+      "views": 17,
+      "explores": 5,
+      "metric_views": 4,
+      "counts": {
+        "review": 5,
+        "exact": 214,
+        "adapted": 41,
+        "manual": 24,
+        "skipped": 1
+      },
+      "seconds": 0.31
+    },
+    {
+      "repo": "looker-open-source/block-stitch-facebook-ads",
+      "dialect": "bigquery",
+      "files": 27,
+      "views": 14,
+      "explores": 11,
+      "metric_views": 11,
+      "counts": {
+        "review": 28,
+        "exact": 569,
+        "adapted": 51,
+        "manual": 1
+      },
+      "seconds": 0.47
+    },
+    {
+      "repo": "looker-open-source/block-stitch-salesforce",
+      "dialect": "bigquery",
+      "files": 11,
+      "views": 6,
+      "explores": 3,
+      "metric_views": 3,
+      "counts": {
+        "review": 33,
+        "exact": 605,
+        "skipped": 38,
+        "adapted": 126,
+        "manual": 89
+      },
+      "seconds": 0.45
+    },
+    {
+      "repo": "looker-open-source/block-weather",
+      "dialect": "bigquery",
+      "files": 9,
+      "views": 7,
+      "explores": 2,
+      "metric_views": 2,
+      "counts": {
+        "review": 6,
+        "adapted": 23,
+        "skipped": 52,
+        "exact": 98,
+        "manual": 10
+      },
+      "seconds": 0.14
+    },
+    {
+      "repo": "looker-open-source/block-zendesk",
+      "dialect": "bigquery",
+      "files": 24,
+      "views": 19,
+      "explores": 3,
+      "metric_views": 2,
+      "counts": {
+        "manual": 145,
+        "adapted": 116,
+        "exact": 310,
+        "review": 22,
+        "skipped": 5
+      },
+      "seconds": 0.36
+    },
+    {
+      "repo": "looker-open-source/block-ccai-dashboard",
+      "dialect": "bigquery",
+      "files": 4,
+      "views": 9,
+      "explores": 1,
+      "metric_views": 1,
+      "counts": {
+        "manual": 8,
+        "exact": 32,
+        "skipped": 4,
+        "adapted": 6
+      },
+      "seconds": 0.04
+    },
+    {
+      "repo": "looker-open-source/block-google-cloud-billing",
+      "dialect": "bigquery",
+      "files": 10,
+      "views": 13,
+      "explores": 3,
+      "metric_views": 2,
+      "counts": {
+        "manual": 56,
+        "exact": 74,
+        "skipped": 11,
+        "adapted": 12,
+        "review": 1
+      },
+      "seconds": 0.26
+    },
+    {
+      "repo": "looker-open-source/block-github",
+      "dialect": "bigquery",
+      "files": 41,
+      "views": 35,
+      "explores": 4,
+      "metric_views": 4,
+      "counts": {
+        "review": 32,
+        "adapted": 92,
+        "exact": 330,
+        "skipped": 73,
+        "manual": 118
+      },
+      "seconds": 0.35
+    },
+    {
+      "repo": "looker-open-source/block-google-campaign-manager-dts-marketplace",
+      "dialect": "bigquery",
+      "files": 24,
+      "views": 16,
+      "explores": 5,
+      "metric_views": 4,
+      "counts": {
+        "review": 18,
+        "manual": 19,
+        "exact": 212,
+        "adapted": 126,
+        "skipped": 40
+      },
+      "seconds": 0.35
+    },
+    {
+      "repo": "looker-open-source/block-google-chronicle",
+      "dialect": "bigquery",
+      "files": 43,
+      "views": 969,
+      "explores": 16,
+      "metric_views": 11,
+      "counts": {
+        "manual": 1028,
+        "exact": 3600,
+        "adapted": 319,
+        "skipped": 830
+      },
+      "seconds": 8.82
+    },
+    {
+      "repo": "looker-open-source/block-business-messages",
+      "dialect": "bigquery",
+      "files": 11,
+      "views": 7,
+      "explores": 5,
+      "metric_views": 4,
+      "counts": {
+        "skipped": 23,
+        "manual": 18,
+        "exact": 78,
+        "adapted": 14
+      },
+      "seconds": 0.1
+    },
+    {
+      "repo": "looker-open-source/block-hubspot-marketing",
+      "dialect": "bigquery",
+      "files": 30,
+      "views": 27,
+      "explores": 2,
+      "metric_views": 2,
+      "counts": {
+        "review": 22,
+        "adapted": 17,
+        "manual": 153,
+        "exact": 184,
+        "skipped": 59
+      },
+      "seconds": 0.29
+    },
+    {
+      "repo": "looker-open-source/block-jira-new",
+      "dialect": "bigquery",
+      "files": 29,
+      "views": 23,
+      "explores": 4,
+      "metric_views": 4,
+      "counts": {
+        "review": 43,
+        "exact": 143,
+        "adapted": 27,
+        "manual": 145,
+        "skipped": 70
+      },
+      "seconds": 0.18
+    },
+    {
+      "repo": "looker-open-source/block-dialogflow",
+      "dialect": "bigquery",
+      "files": 6,
+      "views": 3,
+      "explores": 1,
+      "metric_views": 1,
+      "counts": {
+        "manual": 2,
+        "exact": 38,
+        "adapted": 7,
+        "skipped": 2
+      },
+      "seconds": 0.06
+    }
+  ],
+  "totals": {
+    "adapted": 2111,
+    "manual": 5204,
+    "review": 497,
+    "skipped": 3553,
+    "exact": 21436
+  },
+  "by_kind": {
+    "join": {
+      "adapted": 42,
+      "manual": 1035,
+      "review": 295
+    },
+    "field": {
+      "skipped": 3553,
+      "exact": 19879,
+      "manual": 2793,
+      "adapted": 2069,
+      "review": 9
+    },
+    "measure": {
+      "manual": 1376,
+      "exact": 1557,
+      "review": 193
+    }
+  },
+  "liquid_manual": 2376,
+  "liquid_pattern_projects": {
+    "templated_filter_condition": 20,
+    "date_start_or_end": 17,
+    "parameter": 23
+  },
+  "top_reasons": [
+    {
+      "status": "manual",
+      "reason": "Base view not translated: Derived table SQL uses Liquid templating",
+      "count": 1369
+    },
+    {
+      "status": "manual",
+      "reason": "Join unnests a nested array (BigQuery UNNEST)",
+      "count": 992
+    },
+    {
+      "status": "manual",
+      "reason": "Dimension of a one_to_many join can't be a metric view field",
+      "count": 878
+    },
+    {
+      "status": "manual",
+      "reason": "Uses Liquid templating ({% %} or {{ }})",
+      "count": 377
+    },
+    {
+      "status": "manual",
+      "reason": "Base view not translated: sql_table_name uses Liquid",
+      "count": 333
+    },
+    {
+      "status": "review",
+      "reason": "Table '\u2026' comes from a bigquery connection",
+      "count": 285
+    },
+    {
+      "status": "manual",
+      "reason": "Base view not translated: Derived table '\u2026' it builds on uses Liquid templating",
+      "count": 226
+    },
+    {
+      "status": "review",
+      "reason": "Looker computes this over distinct rows of the joined view (symmetric aggregates)",
+      "count": 192
+    },
+    {
+      "status": "manual",
+      "reason": "Base view not translated: Native derived table (explore_source)",
+      "count": 122
+    },
+    {
+      "status": "manual",
+      "reason": "Dimension group of a one_to_many join can't be a field",
+      "count": 120
+    },
+    {
+      "status": "manual",
+      "reason": "Base view not translated: Derived table '\u2026' it builds on has no SQL (native derived table)",
+      "count": 104
+    },
+    {
+      "status": "manual",
+      "reason": "Base view not translated: Derived table without SQL",
+      "count": 91
+    },
+    {
+      "status": "manual",
+      "reason": "Templated filter (filter field)",
+      "count": 67
+    },
+    {
+      "status": "manual",
+      "reason": "Looker parameter",
+      "count": 62
+    },
+    {
+      "status": "manual",
+      "reason": "Depends on measure '\u2026', which was not translated",
+      "count": 57
+    }
+  ]
+}

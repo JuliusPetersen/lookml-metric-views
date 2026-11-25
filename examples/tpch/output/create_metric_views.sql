@@ -1,0 +1,185 @@
+-- Creates one metric view per Looker explore in workspace.lookml_test.
+-- Read report.md first: items marked Review can give different numbers than Looker.
+
+CREATE OR REPLACE VIEW workspace.lookml_test.tpch__lineitem
+WITH METRICS
+LANGUAGE YAML
+AS $$
+version: '1.1'
+comment: One row per order line, with order, customer and nation. (Converted from Looker explore 'lineitem'.)
+source: samples.tpch.lineitem
+joins:
+- name: orders
+  source: samples.tpch.orders
+  'on': source.l_orderkey = orders.o_orderkey
+  joins:
+  - name: customer
+    source: samples.tpch.customer
+    'on': orders.o_custkey = customer.c_custkey
+    joins:
+    - name: nation
+      source: samples.tpch.nation
+      'on': customer.c_nationkey = nation.n_nationkey
+filter: source.l_shipdate < DATE'1998-09-01'
+fields:
+- name: return_flag
+  expr: source.l_returnflag
+  display_name: Return Flag
+- name: ship_mode
+  expr: source.l_shipmode
+  display_name: Ship Mode
+- name: quantity
+  expr: source.l_quantity
+  display_name: Quantity
+- name: quantity_tier
+  expr: CASE WHEN source.l_quantity < 10 THEN 'Below 10' WHEN source.l_quantity >= 10 AND source.l_quantity < 25 THEN '10 to 24' WHEN source.l_quantity >= 25 AND source.l_quantity < 40 THEN '25 to 39' WHEN source.l_quantity >= 40 THEN '40 or Above' ELSE 'Undefined' END
+  display_name: Quantity Tier
+- name: net_revenue
+  expr: source.l_extendedprice * (1 - source.l_discount)
+  display_name: Net Revenue
+- name: is_discounted
+  expr: source.l_discount > 0
+  display_name: Is Discounted
+- name: l_shipdate_raw
+  expr: source.l_shipdate
+  display_name: Ship Raw
+- name: l_shipdate_date
+  expr: TO_DATE(source.l_shipdate)
+  display_name: Ship Date
+- name: l_shipdate_month
+  expr: TO_DATE(DATE_TRUNC('MONTH', source.l_shipdate))
+  display_name: Ship Month
+- name: l_shipdate_year
+  expr: YEAR(source.l_shipdate)
+  display_name: Ship Year
+- name: orders_o_orderkey
+  expr: orders.o_orderkey
+  display_name: Orders O Orderkey
+- name: orders_status
+  expr: orders.o_orderstatus
+  display_name: Orders Status
+- name: orders_priority
+  expr: orders.o_orderpriority
+  display_name: Orders Priority
+- name: orders_total_price
+  expr: orders.o_totalprice
+  display_name: Orders Total Price
+- name: orders_ordered_date
+  expr: TO_DATE(orders.o_orderdate)
+  display_name: Orders Ordered Date
+- name: orders_ordered_month
+  expr: TO_DATE(DATE_TRUNC('MONTH', orders.o_orderdate))
+  display_name: Orders Ordered Month
+- name: orders_ordered_year
+  expr: YEAR(orders.o_orderdate)
+  display_name: Orders Ordered Year
+- name: customer_c_custkey
+  expr: orders.customer.c_custkey
+  display_name: Customer C Custkey
+- name: customer_segment
+  expr: orders.customer.c_mktsegment
+  display_name: Customer Segment
+- name: nation_name
+  expr: orders.customer.nation.n_name
+  display_name: Nation Name
+measures:
+- name: line_count
+  expr: COUNT(1)
+  display_name: Line Count
+- name: total_quantity
+  expr: SUM(source.l_quantity)
+  display_name: Total Quantity
+- name: total_net_revenue
+  expr: SUM((source.l_extendedprice * (1 - source.l_discount)))
+  display_name: Total Net Revenue
+- name: returned_revenue
+  expr: SUM((source.l_extendedprice * (1 - source.l_discount))) FILTER (WHERE source.l_returnflag = 'R')
+  display_name: Returned Revenue
+- name: discounted_lines
+  expr: COUNT(1) FILTER (WHERE (source.l_discount > 0))
+  display_name: Discounted Lines
+- name: orders_order_count
+  expr: COUNT(DISTINCT orders.o_orderkey)
+  display_name: Orders Order Count
+- name: orders_total_order_value
+  expr: SUM(orders.o_totalprice)
+  display_name: Orders Total Order Value
+  comment: Sum of order totals. In the lineitem explore Looker sums each order once.
+- name: orders_max_order_value
+  expr: MAX(orders.o_totalprice)
+  display_name: Orders Max Order Value
+- name: orders_urgent_orders
+  expr: COUNT(DISTINCT orders.o_orderkey) FILTER (WHERE orders.o_orderpriority = '1-URGENT')
+  display_name: Orders Urgent Orders
+- name: customer_customer_count
+  expr: COUNT(DISTINCT orders.customer.c_custkey)
+  display_name: Customer Customer Count
+- name: return_rate
+  expr: 1.0 * MEASURE(`returned_revenue`) / NULLIF(MEASURE(`total_net_revenue`), 0)
+  display_name: Return Rate
+$$;
+
+CREATE OR REPLACE VIEW workspace.lookml_test.tpch__orders
+WITH METRICS
+LANGUAGE YAML
+AS $$
+version: '1.1'
+comment: (Converted from Looker explore 'orders'.)
+source: samples.tpch.orders
+joins:
+- name: customer
+  source: samples.tpch.customer
+  'on': source.o_custkey = customer.c_custkey
+  joins:
+  - name: nation
+    source: samples.tpch.nation
+    'on': customer.c_nationkey = nation.n_nationkey
+fields:
+- name: o_orderkey
+  expr: source.o_orderkey
+  display_name: O Orderkey
+- name: status
+  expr: source.o_orderstatus
+  display_name: Status
+- name: priority
+  expr: source.o_orderpriority
+  display_name: Priority
+- name: total_price
+  expr: source.o_totalprice
+  display_name: Total Price
+- name: ordered_date
+  expr: TO_DATE(source.o_orderdate)
+  display_name: Ordered Date
+- name: ordered_month
+  expr: TO_DATE(DATE_TRUNC('MONTH', source.o_orderdate))
+  display_name: Ordered Month
+- name: ordered_year
+  expr: YEAR(source.o_orderdate)
+  display_name: Ordered Year
+- name: customer_c_custkey
+  expr: customer.c_custkey
+  display_name: Customer C Custkey
+- name: customer_segment
+  expr: customer.c_mktsegment
+  display_name: Customer Segment
+- name: nation_name
+  expr: customer.nation.n_name
+  display_name: Nation Name
+measures:
+- name: order_count
+  expr: COUNT(1)
+  display_name: Order Count
+- name: total_order_value
+  expr: SUM(source.o_totalprice)
+  display_name: Total Order Value
+  comment: Sum of order totals. In the lineitem explore Looker sums each order once.
+- name: max_order_value
+  expr: MAX(source.o_totalprice)
+  display_name: Max Order Value
+- name: urgent_orders
+  expr: COUNT(1) FILTER (WHERE source.o_orderpriority = '1-URGENT')
+  display_name: Urgent Orders
+- name: customer_customer_count
+  expr: COUNT(DISTINCT customer.c_custkey)
+  display_name: Customer Customer Count
+$$;

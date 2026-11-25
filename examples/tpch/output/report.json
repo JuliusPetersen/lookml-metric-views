@@ -1,0 +1,556 @@
+{
+  "summary": {
+    "explores": 2,
+    "metric_views": 2,
+    "counts": {
+      "exact": 45,
+      "adapted": 5,
+      "review": 1,
+      "manual": 0,
+      "skipped": 8
+    },
+    "by_kind": {
+      "join": {
+        "exact": 5,
+        "adapted": 0,
+        "review": 0,
+        "manual": 0,
+        "skipped": 0
+      },
+      "field": {
+        "exact": 25,
+        "adapted": 5,
+        "review": 0,
+        "manual": 0,
+        "skipped": 8
+      },
+      "measure": {
+        "exact": 15,
+        "adapted": 0,
+        "review": 1,
+        "manual": 0,
+        "skipped": 0
+      }
+    },
+    "top_reasons": [
+      {
+        "status": "review",
+        "reason": "Looker computes this over distinct rows of the joined view (symmetric aggregates)",
+        "count": 1
+      }
+    ]
+  },
+  "warnings": [],
+  "explores": [
+    {
+      "model": "tpch",
+      "explore": "lineitem",
+      "metric_view": "tpch__lineitem",
+      "items": [
+        {
+          "explore": "lineitem",
+          "kind": "source",
+          "looker": "lineitem",
+          "status": "exact",
+          "reason": "",
+          "name": ""
+        },
+        {
+          "explore": "lineitem",
+          "kind": "join",
+          "looker": "orders",
+          "status": "exact",
+          "reason": "",
+          "name": "orders"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "join",
+          "looker": "customer",
+          "status": "exact",
+          "reason": "",
+          "name": "customer"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "join",
+          "looker": "nation",
+          "status": "exact",
+          "reason": "",
+          "name": "nation"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "filter",
+          "looker": "sql_always_where",
+          "status": "exact",
+          "reason": "Becomes the metric view filter, applied to every query.",
+          "name": ""
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.line_key",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.l_orderkey",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.return_flag",
+          "status": "exact",
+          "reason": "",
+          "name": "return_flag"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.ship_mode",
+          "status": "exact",
+          "reason": "",
+          "name": "ship_mode"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.quantity",
+          "status": "exact",
+          "reason": "",
+          "name": "quantity"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.quantity_tier",
+          "status": "adapted",
+          "reason": "Tiers become a CASE expression; Looker's sort order of tiers is not kept.",
+          "name": "quantity_tier"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.net_revenue",
+          "status": "exact",
+          "reason": "",
+          "name": "net_revenue"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.is_discounted",
+          "status": "adapted",
+          "reason": "Boolean field; Looker displays it as Yes/No.",
+          "name": "is_discounted"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.l_shipdate_raw",
+          "status": "exact",
+          "reason": "",
+          "name": "l_shipdate_raw"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.l_shipdate_date",
+          "status": "exact",
+          "reason": "",
+          "name": "l_shipdate_date"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.l_shipdate_month",
+          "status": "adapted",
+          "reason": "Looker shows 'YYYY-MM'; here it is the first day of the month.",
+          "name": "l_shipdate_month"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "lineitem.l_shipdate_year",
+          "status": "exact",
+          "reason": "",
+          "name": "l_shipdate_year"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.o_orderkey",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_o_orderkey"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.o_custkey",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.status",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_status"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.priority",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_priority"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.total_price",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_total_price"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.ordered_date",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_ordered_date"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.ordered_month",
+          "status": "adapted",
+          "reason": "Looker shows 'YYYY-MM'; here it is the first day of the month.",
+          "name": "orders_ordered_month"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "orders.ordered_year",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_ordered_year"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "customer.c_custkey",
+          "status": "exact",
+          "reason": "",
+          "name": "customer_c_custkey"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "customer.c_nationkey",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "customer.segment",
+          "status": "exact",
+          "reason": "",
+          "name": "customer_segment"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "nation.n_nationkey",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "lineitem",
+          "kind": "field",
+          "looker": "nation.name",
+          "status": "exact",
+          "reason": "",
+          "name": "nation_name"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "lineitem.line_count",
+          "status": "exact",
+          "reason": "",
+          "name": "line_count"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "lineitem.total_quantity",
+          "status": "exact",
+          "reason": "",
+          "name": "total_quantity"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "lineitem.total_net_revenue",
+          "status": "exact",
+          "reason": "",
+          "name": "total_net_revenue"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "lineitem.returned_revenue",
+          "status": "exact",
+          "reason": "",
+          "name": "returned_revenue"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "lineitem.discounted_lines",
+          "status": "exact",
+          "reason": "",
+          "name": "discounted_lines"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "orders.order_count",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_order_count"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "orders.total_order_value",
+          "status": "review",
+          "reason": "Looker computes this over distinct rows of the joined view (symmetric aggregates); here it counts once per row of the explore's base view. Define it in a metric view based on this view, or use a one_to_many design.",
+          "name": "orders_total_order_value"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "orders.max_order_value",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_max_order_value"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "orders.urgent_orders",
+          "status": "exact",
+          "reason": "",
+          "name": "orders_urgent_orders"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "customer.customer_count",
+          "status": "exact",
+          "reason": "",
+          "name": "customer_customer_count"
+        },
+        {
+          "explore": "lineitem",
+          "kind": "measure",
+          "looker": "lineitem.return_rate",
+          "status": "exact",
+          "reason": "",
+          "name": "return_rate"
+        }
+      ]
+    },
+    {
+      "model": "tpch",
+      "explore": "orders",
+      "metric_view": "tpch__orders",
+      "items": [
+        {
+          "explore": "orders",
+          "kind": "source",
+          "looker": "orders",
+          "status": "exact",
+          "reason": "",
+          "name": ""
+        },
+        {
+          "explore": "orders",
+          "kind": "join",
+          "looker": "customer",
+          "status": "exact",
+          "reason": "",
+          "name": "customer"
+        },
+        {
+          "explore": "orders",
+          "kind": "join",
+          "looker": "nation",
+          "status": "exact",
+          "reason": "",
+          "name": "nation"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.o_orderkey",
+          "status": "exact",
+          "reason": "",
+          "name": "o_orderkey"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.o_custkey",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.status",
+          "status": "exact",
+          "reason": "",
+          "name": "status"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.priority",
+          "status": "exact",
+          "reason": "",
+          "name": "priority"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.total_price",
+          "status": "exact",
+          "reason": "",
+          "name": "total_price"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.ordered_date",
+          "status": "exact",
+          "reason": "",
+          "name": "ordered_date"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.ordered_month",
+          "status": "adapted",
+          "reason": "Looker shows 'YYYY-MM'; here it is the first day of the month.",
+          "name": "ordered_month"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "orders.ordered_year",
+          "status": "exact",
+          "reason": "",
+          "name": "ordered_year"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "customer.c_custkey",
+          "status": "exact",
+          "reason": "",
+          "name": "customer_c_custkey"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "customer.c_nationkey",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "customer.segment",
+          "status": "exact",
+          "reason": "",
+          "name": "customer_segment"
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "nation.n_nationkey",
+          "status": "skipped",
+          "reason": "Hidden in Looker; still used inside other definitions.",
+          "name": ""
+        },
+        {
+          "explore": "orders",
+          "kind": "field",
+          "looker": "nation.name",
+          "status": "exact",
+          "reason": "",
+          "name": "nation_name"
+        },
+        {
+          "explore": "orders",
+          "kind": "measure",
+          "looker": "orders.order_count",
+          "status": "exact",
+          "reason": "",
+          "name": "order_count"
+        },
+        {
+          "explore": "orders",
+          "kind": "measure",
+          "looker": "orders.total_order_value",
+          "status": "exact",
+          "reason": "",
+          "name": "total_order_value"
+        },
+        {
+          "explore": "orders",
+          "kind": "measure",
+          "looker": "orders.max_order_value",
+          "status": "exact",
+          "reason": "",
+          "name": "max_order_value"
+        },
+        {
+          "explore": "orders",
+          "kind": "measure",
+          "looker": "orders.urgent_orders",
+          "status": "exact",
+          "reason": "",
+          "name": "urgent_orders"
+        },
+        {
+          "explore": "orders",
+          "kind": "measure",
+          "looker": "customer.customer_count",
+          "status": "exact",
+          "reason": "",
+          "name": "customer_customer_count"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Product notes: LookML to metric views</title>
+<meta name="description" content="Why Looker teams on Databricks need a path into metric views, what this tool decides, what testing changed and what is not validated yet.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<style>
+  .notes { max-width: 760px; padding-top: 48px; }
+  .notes h1 { max-width: none; font-size: clamp(30px, 4vw, 44px); }
+  .notes h2 { margin-top: 44px; }
+  .notes p, .notes li { max-width: var(--measure); }
+  .notes table { border-collapse: collapse; margin: 12px 0; background: var(--sheet); border: 1px solid var(--line); font-size: 15px; }
+  .notes th, .notes td { padding: 8px 12px; border-bottom: 1px solid #e3e8e6; text-align: left; vertical-align: top; }
+  .notes .src { font-size: 14px; color: var(--ink-soft); }
+  .notes code { font: 400 14px var(--mono); }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="./">LookML to metric views</a>
+    <nav aria-label="Project links">
+      <a href="./">Try it</a>
+      <a href="https://github.com/JuliusPetersen/lookml-metric-views">Source on GitHub</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap notes">
+  <h1>Product notes</h1>
+  <p class="src">Julius Petersen, November 2026. Independent work from public sources, not reviewed by Databricks.</p>
+
+  <h2>The problem</h2>
+  <p>Databricks tested Genie One on 125 business questions in November 2026. With tables only it answered 64% correctly. With governed definitions in Unity Catalog metric views and curated agents it reached 93 to 95%.<sup><a href="#s1">1</a></sup> Getting a company's definitions into metric views is therefore the step that decides whether its users can trust Genie.</p>
+  <p>Databricks has built that step for two BI tools. Genie Code's <code>/importBI</code> reads Tableau and Power BI files and creates metric views, now in bulk.<sup><a href="#s2">2</a></sup> Genie Ontology reads Power BI models today, with Tableau and Sigma announced.<sup><a href="#s3">3</a></sup> Looker is not on either list as of 25 November 2026. A Looker team on Databricks has its definitions in LookML and two options: rebuild them by hand, or let Genie work on raw tables.</p>
+
+  <h2>Who it is for</h2>
+  <ul>
+    <li>An analytics engineer at a company that runs Looker on Databricks and wants AI/BI dashboards or Genie on the same numbers.</li>
+    <li>A Databricks solutions architect or partner who scopes a Looker migration and needs to know in an hour how much of a project translates without work.</li>
+  </ul>
+
+  <h2>What it does</h2>
+  <p>It reads a LookML project and writes one metric view per explore, with the explore's joins, its dimensions as fields and its measures as measures. Every item gets one of four statuses with a reason: exact, adapted, review or manual. It also writes the SQL to create the views and queries to reconcile totals against Looker before anything is switched off.</p>
+
+  <h2>Decisions</h2>
+  <table>
+    <thead><tr><th>Decision</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>One metric view per explore, not per view</td><td>People query explores, and an explore is where Looker defines joins. Converters that work per view lose the joins. That includes the Apache Ossie path, whose Databricks deploy writes one metric view per dataset without joins.</td></tr>
+      <tr><td>Rules, not a language model</td><td>The same project gives the same output every time, so it can run in CI and be reviewed like code. A model can still help with the items marked manual, with the report as its task list.</td></tr>
+      <tr><td>Flag instead of guess</td><td>A migration that is 95% right and silently wrong in the rest is worse than one that says where the 5% is. Anything that can change a number is marked review, with the reason.</td></tr>
+      <tr><td>Runs in the browser</td><td>Teams can try it on a private project without uploading their LookML anywhere.</td></tr>
+      <tr><td>SQL translation only for the LookML snippets</td><td>Looker on Databricks already writes Spark SQL, so most of the work is structure. For BigQuery or Snowflake projects, each snippet is translated with sqlglot before references are filled in.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>What testing changed</h2>
+  <p>I created the generated metric views in a Databricks Free Edition workspace and compared every measure with SQL that reproduces Looker's results. Two findings changed the tool.</p>
+  <p><strong>Sums over joined views.</strong> In Looker, a sum over a joined view counts each joined row once (symmetric aggregates). In a metric view the same expression counts once per row of the base table. On TPC-H, the order value measure in the order lines explore came out at 4.9 times Looker's value. The first version marked it exact. It is now marked review with that explanation, and the live check confirms that every other measure matches.</p>
+  <p><strong>Subqueries.</strong> The first version flagged every subquery as risky. The live test showed that Databricks accepts subqueries that refer to a joined table, but rejects correlated subqueries that refer to the base table. The tool now marks exactly that case as manual. After the change, all five metric views from Looker's public thelook project were created without edits.</p>
+
+  <h2>Evidence</h2>
+  <ul>
+    <li><a href="./#live">Live check in Databricks</a>: 16 measures, 15 exact matches, 1 expected difference.</li>
+    <li><a href="./#survey-title">Survey of 42 public Looker projects</a>: 81% of 29,248 fields, measures and joins translate without a person, 72% in the median project. One project holds 36% of the items, and without it 71% translate. 8 of 42 projects gave no metric view.</li>
+    <li>25 automated tests on the hard cases: nested joins, fan-out, filters, Liquid, one-to-many and many-to-many joins, derived tables, LookML constants, extends and refinements.</li>
+  </ul>
+
+  <h2>What exists already</h2>
+  <p>I searched Databricks' docs and release notes, GitHub, package indexes, standards bodies and community forums on 25 November 2026 (16 query groups). Closest matches:</p>
+  <ul>
+    <li><code>/importBI</code> and Genie Ontology: Tableau and Power BI, not Looker.</li>
+    <li>Apache Ossie converters: Ossie to Databricks metric views exists, LookML import is on the roadmap. The Databricks deploy keeps relationships out of the metric views.</li>
+    <li>Sidemantic (AGPL): reads LookML into its own runtime; Liquid, includes and sets are not supported.</li>
+    <li>lkml2cube, dbt-converter, Honeydew: LookML into Cube, dbt and Honeydew, not Databricks.</li>
+    <li>A step-by-step guide for a manual LookML to metric view migration (typedef.ai, December 2025).</li>
+  </ul>
+  <p>I found no tool that turns a LookML project into Databricks metric views per explore with a field-level report. That is a statement about this search, not proof that none exists.</p>
+
+  <h2>Not validated yet</h2>
+  <ul>
+    <li>I don't know how many Databricks customers run Looker, so the size of the problem is open.</li>
+    <li>The reference numbers come from SQL I wrote to reproduce Looker's logic, not from a Looker instance.</li>
+    <li>No conversations with analytics engineers who run Looker on Databricks yet, so the user problem is supported by public evidence, not by interviews.</li>
+    <li>Not translated: Liquid templating, Looker parameters, access filters, extends and refinements of explores, sets in field lists, fiscal timeframes and display formats.</li>
+    <li>Timezone conversion depends on Looker connection settings, which a LookML project doesn't contain.</li>
+  </ul>
+
+  <h2>What the survey changed</h2>
+  <p>The first survey run crashed on one explore in 11 of the 42 projects. Most used LookML constants like <code>@{schema}</code> from the project's manifest, which the tool now fills in and reports. It also showed that Liquid templating is the largest blocker: 46% of the items that need a person use it. That decides what a Databricks version would have to solve first.</p>
+
+  <h2>If Databricks built this into /importBI</h2>
+  <p>Accept a LookML repository as a source next to Tableau and Power BI files. The primary metric would be the share of LookML measures that reach Unity Catalog without edits, with the reconcile step built in. The guardrail is the share of migrated measures whose totals differ from Looker without a warning, which has to stay at zero. A pilot with five Looker customers would count as a success if at least 70% of their measures reach Unity Catalog without edits and the guardrail holds. 70% is my assumption, close to the survey's median project. Next steps in order of value: resolve the most common Liquid patterns, templated filters (<code>{% condition %}</code> in 20 of the 42 projects, <code>date_start</code> and <code>date_end</code> in 17) and parameters (23), map Looker parameters to metric view parameters, read real results through the Looker API for automatic reconciliation, and turn access filters into Unity Catalog row filters.</p>
+
+  <h2>Sources</h2>
+  <ol class="src">
+    <li id="s1">Databricks blog, Genie One Accuracy: Why Curated Agents Need Governed Context, 19 Nov 2026.</li>
+    <li id="s2">Databricks docs, Use metric views with external BI tools, and blog, Bulk migrate your dashboards to AI/BI with Genie Code, 19 Nov 2026.</li>
+    <li id="s3">Databricks blog, Announcing GA of Genie Ontology, 11 Nov 2026.</li>
+  </ol>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <p>Built by Julius Petersen, MSc student at Nova SBE, Lisbon. <a href="https://www.linkedin.com/in/julius-petersen-is">LinkedIn</a></p>
+    <p class="fine">Independent project based on public documentation. Not affiliated with or reviewed by Databricks or Google.</p>
+  </div>
+</footer>
+</body>
+</html>
